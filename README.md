@@ -49,14 +49,14 @@ var defaults = {
     if (inst.group[id].is_set)
       inst.resetState(id);
     else
-      inst.set(id, '255, 0, 255');
+      inst.set(id, inst.settings.clickColor);
     inst.group[id].is_set = !inst.group[id].is_set;
 
     if (typeof inst.settings.onClick === 'function')
       inst.settings.onClick.call(this, inst, id);
   },
   mouseOver : function (inst, id) {
-    inst.setTransient(id, inst.settings.rgb);
+    inst.setTransient(id, inst.settings.hoverColor);
 
     if (typeof inst.settings.onHover === 'function')
       inst.settings.onHover.call(this, inst, id);
