@@ -45,18 +45,27 @@ Clicklight provides a fairly simple settings object that can be set during insta
 
 ```javascript
 var defaults = {
-  clicked : function (inst, id) {
+  clicked      : function (inst, id) {
     if (inst.group[id].is_set)
       inst.resetState(id);
     else
       inst.set(id, '255, 0, 255');
     inst.group[id].is_set = !inst.group[id].is_set;
+
+    if (typeof inst.settings.onClick === 'function')
+      inst.settings.onClick.call(this, inst, id);
   },
   mouseOver : function (inst, id) {
     inst.setTransient(id, inst.settings.rgb);
+
+    if (typeof inst.settings.onHover === 'function')
+      inst.settings.onHover.call(this, inst, id);
   },
-  mouseLeave : function (inst, id) {
+  mouseLeave   : function (inst, id) {
     inst.reset(id);
+
+    if (typeof inst.settings.noHover === 'function')
+      inst.settings.noHover.call(this, inst, id);
   },
   onConfigured : null,
   onClick      : null,
@@ -66,3 +75,4 @@ var defaults = {
   rgb          : '0, 255, 255'
 };
 ```  
+This is where all configuration for a given instance lives, any and all of these can be overwritten to fit any situation needed. 
