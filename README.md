@@ -12,13 +12,13 @@ Using clicklight.js is fairly simple in most cases, but can also be built into j
 ####Some Expectations
 Using clicklight is as simple as calling it on the image you want to apply it to.
 
-However, clicklight expects the image in question to be wrapped in `<div></div>` tags so it can apply CSS and insert a canvas onto the webpage. The image must also have an associated map through an images 'usemap' attribute. In addition to this, an ID `data-cl-uid="some_id"` needs to be placed on every area element that clicklight will be responsible for. Every area without this ID will raise an exception and be ignored by clicklight. Prior to instantiation, this would be considered proper setup
+However, clicklight expects the image in question to be wrapped in `<div></div>` tags so it can apply CSS and insert a canvas into the webpage. The image must also have an associated map through the images 'usemap' attribute. In addition to this, an ID `data-cl-uid="some_id"` needs to be placed on every area element that clicklight will be responsible for. Every area without this ID will raise an exception and be ignored by clicklight. Prior to instantiation, this would be considered proper setup
   ```html
    <div>
      <img src="/some/img/src" usemap="#mapName" class="toSelect">
    </div>
    
-   <map name="mapName">                                                                                            
+   <map name="mapName">
      <area shape="rect" alt="" coords="x1,y1,x2,y2" href="" data-cl-uid="id" title="Some Title">
    </map>
    ```
@@ -38,4 +38,31 @@ Just that would fully instatiate a plugin onto the selected image, if however, y
     $('.toSelect').clicklight('ID'); //where id is the name of the instance
   });
   ```  
-  
+Moving forward, when instantiating, clicklight will always take the first string it finds, before the config object, as the name to be assigned to that instance. If something is incorrectly passed, an exception will be raised to make you aware of what's gone wrong.
+
+####Configuration
+Clicklight provides a fairly simple settings object that can be set during instantiation as well as at any point during runtime assuming you have a named instance to access. The default settings are as follows
+
+```javascript
+var defaults = {
+  clicked : function (inst, id) {
+    if (inst.group[id].is_set)
+      inst.resetState(id);
+    else
+      inst.set(id, '255, 0, 255');
+    inst.group[id].is_set = !inst.group[id].is_set;
+  },
+  mouseOver : function (inst, id) {
+    inst.setTransient(id, inst.settings.rgb);
+  },
+  mouseLeave : function (inst, id) {
+    inst.reset(id);
+  },
+  onConfigured : null,
+  onClick      : null,
+  onHover      : null,
+  noHover      : null,
+  alpha        : '0.4',
+  rgb          : '0, 255, 255'
+};
+```  
