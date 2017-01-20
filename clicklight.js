@@ -13,12 +13,21 @@
       else
         inst.set(id, '255, 0, 255');
       inst.group[id].is_set = !inst.group[id].is_set;
+
+      if (typeof inst.settings.onClick === 'function')
+        inst.settings.onClick.call(this, inst, id);
     },
     mouseOver    : function (inst, id) {
       inst.setTransient(id, inst.settings.rgb);
+
+      if (typeof inst.settings.onHover === 'function')
+        inst.settings.onHover.call(this, inst, id);
     },
     mouseLeave   : function (inst, id) {
       inst.reset(id);
+
+      if (typeof inst.settings.noHover === 'function')
+        inst.settings.noHover.call(this, inst, id);
     },
     onConfigured : null,
     onClick      : null,
@@ -118,18 +127,12 @@
     $area.on('click.'  + pluginName, function (event) {
       event.preventDefault();
       inst.settings.clicked.call($area, inst, id);
-      if (typeof inst.settings.onClick === 'function')
-        inst.settings.onClick.call(this, inst, id);
     }).on('mouseenter.'+ pluginName, function () {
       $area.css('cursor', 'pointer');
       inst.settings.mouseOver.call($area, inst, id);
-      if (typeof inst.settings.onHover === 'function')
-        inst.settings.onHover.call(this, inst, id);
     }).on('mouseleave.'+ pluginName, function() {
       $area.css('cursor', 'default');
       inst.settings.mouseLeave.call($area, inst, id);
-      if (typeof inst.settings.noHover === 'function')
-        inst.settings.noHover.call(this, inst, id);
     });
 
     if (!inst.group[id])
