@@ -45,7 +45,7 @@ Clicklight provides a fairly simple settings object that can be set during insta
 
 ```javascript
 var defaults = {
-  clicked      : function (inst, id) {
+  clicked : function (inst, id) {
     if (inst.group[id].is_set)
       inst.resetState(id);
     else
@@ -61,7 +61,7 @@ var defaults = {
     if (typeof inst.settings.onHover === 'function')
       inst.settings.onHover.call(this, inst, id);
   },
-  mouseLeave   : function (inst, id) {
+  mouseLeave : function (inst, id) {
     inst.reset(id);
 
     if (typeof inst.settings.noHover === 'function')
@@ -75,4 +75,4 @@ var defaults = {
   rgb          : '0, 255, 255'
 };
 ```  
-This is where all configuration for a given instance lives, any and all of these can be overwritten to fit any situation needed. 
+This is where all configuration for a given instance lives, any and all of these can be overwritten to fit any situation needed. With default settings, clicked, mouseOver and mouseLeave act as our primary functions within the event handlers, these in turn look at their respective callbacks (also in this settings object) onClick, onHover and noHover. This allows for a few levels of complexity. First and foremost you can change the color and opacity of the different highlighting options on a click and hover event. Go a level deeper and you can provide a callback to be fired after any default highlighting has happened. Want even more control? You can totally overwrite the primary event functions and have the clicklight act however you feel suits your application best. When working with these functions, `this` will always represent the element the event fired on, `inst` will be the current instance you are working with and `id` will be the ID of the group of a given instance for accessing different method calls or whatever else they may key into.
