@@ -164,45 +164,44 @@ when calling into an instance through the API.
 ###The API
 
 Finally, we have arrived at clicklight's API. Clicklight provides a
-very small and simple interface that I blieve covers all the use cases
-one might find themselves needing a solution for if they are using
-this plugin. Calling available methods is done through the clicklight
-instance similar to the way it was instantiated. This would be an
-example method call: 
-`$('toSelect').clicklight('set', 'group1', '255,0,0');`
+very small and simple interface that I believe covers most if not all
+of this plugin's use cases. Calling available methods is done through
+the clicklight instance similar to the way it was instantiated. This
+would be an example method call: `$('toSelect').clicklight('set',
+'group1', '255,0,0');` 
 
-The jQuery selector is used to select any images that have been
-instantiated and are of the collection you would like to apply the
-method to. This can be one image in particular, or every image that's
-been instantiated on a page. The methods themselves are called through
-string identifiers passed into the clicklight object. Any method you
-want to call can be called in this way and it is expected that you do
-so. Let's actually look at the API now and the above call should make
-more sense:
+The jQuery selector is used to select any images that have already
+been instantiated and are of the collection you would like to apply a
+given method to, in this case, 'set'. The selector can be one image in
+particular, or every image that's been instantiated on a page. The
+methods themselves are called through a string identifier passed into
+the clicklight object. Any method you want to call can be called in
+this way and it is expected that you do so. Let's actually look at the
+API now and the above call should make more sense:
 
-1. `set(id, color);`
+1. `clicklight('set', id, color);`
   * Set accepts two arguments, an ID representing an existing group
     and an RGB color value to set that group to.
   * The color passed to set is saved as the 'current' color in the
     groups state for access later by other methods.
-2. `setTransient(id, color);`
+2. `clicklight('setTransient', id, color);`
   * SetTransient accepts the same two arguments as set and applies
     them in the same exact way, on the webpage the two methods will
     appear to be acting the same.
   * The color passed to setTransient is **not** saved to the groups
     state however, it simply applies the color.
-3. `reset(id);`
+3. `clicklight('reset', id);`
   * Reset accepts only one argument, the ID of the group you would
     like to reset. Reset will look at the groups 'current' color in
     state and apply that color onto the group.
   * Unlike set, reset does not change the state of the group, it only
     applies the color that a group's state has as 'current'.
-4. `resetState(id);`
+4. `clicklight('resetState', id);`
   * ResetState accepts only one argument just like reset. The ID of
     the group you would like to reset the state of.
   * First, resetState will set the 'current' color in state to
     null. Then, it will clear any color currently on the canvas.
-5. `updateConfig(config);`
+5. `clicklight('updateConfig', config);`
   * If at any point you want to update the configuration of an
     instance during run time, this is the method that'll help you do
     so.
@@ -210,3 +209,7 @@ more sense:
     which is referenced throughout the plugin's lifecycle including
     all callbacks and default color references.
 
+##Examples
+
+Here I will be providing a few example code blocks and link showcasing
+uses of the plugin ranging from very simple to more involved use cases.
