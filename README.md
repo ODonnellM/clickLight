@@ -24,24 +24,18 @@ However, clicklight expects the image in question to be wrapped in `<div></div>`
    ```
    
 ####Instantiation
-With the HTML reflecting what clicklight will expect, we can now instantiate the plugin. We have a few approaches to this depending on what the plugin will be specifically in control of and how you want it to act. Each instance is considered anonymous or named, building an anonymous default instance would look like this
+Assuming we are working with the above HTML as our webpage, we can now look into instantiating the plugin. This would
 
   ```javascript
   $(function() {
     $('.toSelect').clicklight();
   });
-  ```  
-Just that would fully instatiate a plugin onto the selected image, if however, you were planning on getting back at a given instance of the plugin to make method calls or whatever your purposes are, you will need a named instance. To do this, we simply give the clicklight call an ID to file the instance under like this
-  
-```javascript
-  $(function() {
-    $('.toSelect').clicklight('ID'); //where id is the name of the instance
-  });
-  ```  
-Moving forward, when instantiating, clicklight will always take the first string it finds, before the config object, as the name to be assigned to that instance. If something is incorrectly passed, an exception will be raised to make you aware of what's gone wrong.
+  ```
+
+
 
 ####Configuration
-Clicklight provides a fairly simple settings object that can be set during instantiation as well as at any point during runtime assuming you have a named instance to access. The default settings are as follows
+Clicklight provides a fairly simple settings object that can be set during instantiation as well as at any point during runtime assuming you have a named instance to access. The default settings are as follows:
 
 ```javascript
 var defaults = {
