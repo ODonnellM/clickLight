@@ -1,9 +1,8 @@
 ;(function($, undefined) {
   'use strict';
   var pluginName   = 'clicklight';
-  var instances    = {};
   var cl_container = { 'position': 'relative' };
-  var cl_image     = { 'position': 'absolute', 'z-index': '1', 'top': '0', 'left': '0' };
+  var cl_image     = { 'position': 'relative', 'z-index': '1', 'top': '0', 'left': '0' };
   var cl_canvas    = { 'position': 'absolute', 'z-index': '2', 'top': '0', 'left': '0', 'pointer-events': 'none' }
 
   var defaults = {
@@ -38,10 +37,11 @@
     clickColor   : '255, 0, 0'
   };
 
-  function Clicklight(options, id) {
+  function Clicklight(img, options) {
     this.settings = $.extend({}, defaults, options);
     this.group = {};
-    this.id = id;
+
+    _init_inst(img, this);
   }
 
   function _val_arguments (numArgs, name) {
@@ -91,29 +91,25 @@
   function _init_inst (img, inst) {
     var $img = $(img);
 
-    if (!$img.is('img'))
-      console.log('ERROR:', $img, 'is not an image');
+    if (!$img.parent().is('div'))
+      console.log('ERROR:', $img, 'is not located within a div');
     else {
-      if (!$img.parent().is('div'))
-        console.log('ERROR:', $img, 'is not located within a div');
-      else {
-        var container = $img.parent().append('<canvas id="cl-cvs"></canvas>');
-        var canvas    = document.getElementById("cl-cvs");
-        var mapName   = $img.attr('usemap').slice(1);
-        var map       = $('map[name="'+ mapName +'"]');
-        var ctx       = canvas.getContext("2d");
+      var mapName   = $img.attr('usemap').slice(1);
+      var map       = $('map[name="'+ mapName +'"]');
+      var container = $img.parent().append('<canvas id="cl-cvs-'+mapName+'"></canvas>');
+      var canvas    = document.getElementById('cl-cvs-'+mapName+'');
+      var ctx       = canvas.getContext('2d');
 
-        container.css(cl_container);
-        $img.css(cl_image);
-        $(canvas).css(cl_canvas);
+      container.css(cl_container);
+      $img.css(cl_image);
+      $(canvas).css(cl_canvas);
 
-        ctx.canvas.width  = $img.width();
-        ctx.canvas.height = $img.height();
+      ctx.canvas.width  = $img.width();
+      ctx.canvas.height = $img.height();
 
-        map.children('area').each(function() {
+      map.children('area').each(function() {
           _init_areas($(this), inst, ctx);
-        });
-      }
+      });
     }
   }
 
@@ -181,42 +177,31 @@
 
   $.extend(Clicklight.prototype, public_api);
   $.fn[pluginName] = function () {
-    var args = [].slice.call(arguments), inst;
-    var id = null, config = null, method = null;
+    var args = arguments?[].slice.call(arguments):null, inst;
 
-    if (typeof args[0] === 'string')
-      id = args.shift();
-
-    if (typeof args[0] === 'object') {
-      config = args.shift();
-      if (args[0])
-        console.log('ERROR: all arguments passed after config have been ignored -\n',
-                    'Cannot build inst alongside', args);
-    }
-    else if (typeof args[0] === 'string')
-      method = args.shift();
-
-    if (instances[id])
-      inst = instances[id];
-
-    else {
-      if (!method) {
-        inst = new Clicklight(config, id||null);
-        this.each(function() { _init_inst(this, inst); });
-        if (id) instances[id] = inst;
-        if (typeof inst.settings.onConfigured === 'function') {
-          inst.settings.onConfigured.call(inst, id);
-        }
+    if (!args[0] || typeof args[0] === 'object') {
+      this.each(function() {
+        if (!$(this).is('img'))
+          console.log('ERROR: Clicklight can only be instantiated on images\n', this, 'will be skipped');
+        else
+          $.data(this, 'cl-instance') ?
+            console.log('ERROR: Clicklight cannot be instantiated twice on', this) :
+            $.data(this, 'cl-instance', new Clicklight(this, args[0]||null));
+      });
+    } else if (typeof args[0] === 'string') {
+      if (args[0] in public_api) {
+        this.each(function() {
+          var inst = $.data(this, 'cl-instance')||null;
+          if (!inst)
+            console.log('ERROR: no Clicklight instance found on', this);
+          else
+            inst[args[0]].apply(inst, args.slice(1));
+        });
       } else
-        console.log('ERROR: no instance found under \''+ id + '\'');
-    }
+        console.log('ERROR: Unknown method call', args[0]);
+    } else
+      console.log('ERROR: unknown call on clicklight with argument', args[0]);
 
-    if (inst && method) {
-      if (method in public_api)
-        inst[method].apply(inst, args);
-      else
-        console.log('ERROR: Unknown call on clicklight \''+ id +'\' with \''+ method +'\'');
-    }
     return this;
   }
 })(jQuery, undefined);
