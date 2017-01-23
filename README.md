@@ -185,7 +185,7 @@ more sense:
     and an RGB color value to set that group to.
   * The color passed to set is saved as the 'current' color in the
     groups state for access later by other methods.
-    2. `setTransient(id, color);`
+2. `setTransient(id, color);`
   * SetTransient accepts the same two arguments as set and applies
     them in the same exact way, on the webpage the two methods will
     appear to be acting the same.
