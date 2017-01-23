@@ -24,7 +24,7 @@ needed. Walking through the basics should give you an idea of how you
 can incorporate this open design into your own project dealing with a
 more personalized use case.
 
-####Some Expectations
+###Some Expectations
 
 Using clicklight is as simple as calling it on the image or collection
 of images you want to apply it to. The system expects these images to
@@ -50,7 +50,7 @@ Prior to instantiation, this would be considered proper setup:
    </map>
    ```
    
-####Instantiation
+###Instantiation
 
 Working with the above HTML as our webpage, we can now look into
 instantiating the plugin. This is fairly simple and can be done in
@@ -82,7 +82,7 @@ While adding in some of our own config options would look like this:
 
 As simply as that, there is now a fully functional instance on our webpage.
 
-####Configuration
+###Configuration
 
 Clicklight provides a simple config object that can be set during
 instantiation and reset at any point during runtime. For those curious
@@ -131,7 +131,12 @@ these are the functions that will initially be executed and contain
 the plugin's default behavior. These initial callbacks then turn to
 their own respective callbacks `onClick`, `onHover` and `noHover`, and
 execute them. These extra callbacks are strictly for your use and
-changing them will not effect the plugin's default behavior.
+changing them will not effect the plugin's default behavior. This
+leaves us with one last callback, `onConfigured`. This is fairly
+self-explanatory but I'll go into it anyway. This callback will be
+fired on each instance after each has finished its setup. Anything you
+the user may need or want to do alongside the plugin's instantiation
+can be done here.
 
 Turning now to the few remaining properties of this object, we see
 `alpha`, `hoverColor` and `clickColor`. These are the properties used
@@ -153,4 +158,57 @@ the primary event callbacks and have the clicklight act however you
 feel it should for your application. When working with any of these
 functions, `this` will always represent the element the event fired
 on, `inst` will be the current instance you are working with and `id`
-will be the ID of the element that fired the event.
+will be the ID of the element that fired the event which can be used
+when calling into an instance through the API.
+
+###The API
+
+Finally, we have arrived at clicklight's API. Clicklight provides a
+very small and simple interface that I blieve covers all the use cases
+one might find themselves needing a solution for if they are using
+this plugin. Calling available methods is done through the clicklight
+instance similar to the way it was instantiated. This would be an
+example method call: 
+`$('toSelect').clicklight('set', 'group1', '255,0,0');`
+
+The jQuery selector is used to select any images that have been
+instantiated and are of the collection you would like to apply the
+method to. This can be one image in particular, or every image that's
+been instantiated on a page. The methods themselves are called through
+string identifiers passed into the clicklight object. Any method you
+want to call can be called in this way and it is expected that you do
+so. Let's actually look at the API now and the above call should make
+more sense:
+
+1. `set(id, color);`
+  * Set accepts two arguments, an ID representing an existing group
+    and an RGB color value to set that group to.
+  * The color passed to set is also saved as the most recent color
+    in the groups state for access later by other methods.
+2. `setTransient(id, color);` 
+  * setTransient accepts the same two arguments as set and applies
+    them in the same exact way, on the webpage the two methods will
+    appear to be acting the same.
+  * The color passed to setTransient is **not** saved to the groups
+    state however. This works well in conjunction with reset for hover
+    events.
+3. `reset(id);`
+  * Reset accepts only one argument, the ID of the group you would
+    like to reset. Reset will look at the most recent color in a
+    groups state and apply that color onto the group.
+  * Unlike set, reset does not change the state of the group, it only
+    applies the color that a groups state has as most recent.
+4. `resetState(id);`
+  * ResetState accepts only one argument just like reset. The ID of
+    the group you would like to reset the state of.
+  * First, resetState will set teh most recent color to null so it's
+    as if nothings been set. Then, it will clear any color it
+    currently has placed on the canvas.
+5. `updateConfig(config);`
+  * If at any point you want to update the configuration of an
+    instance during run time, this is the method that'll help you do
+    so
+  * It works by simple re-extending the settings object internally
+    which is referenced throughout the plugin's lifecycle including
+    all callbacks and defualt color references.
+
