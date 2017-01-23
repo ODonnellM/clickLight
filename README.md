@@ -19,10 +19,10 @@ versions will be noted here as they are discovered.
 ##Using the plugin
 
 Using clicklight.js is fairly simple in most cases, and can still be
-easily built into just about any ecosystem where it's funcionality is
+easily built into just about any ecosystem where it's functionality is
 needed. Walking through the basics should give you an idea of how you
 can incorporate this open design into your own project dealing with a
-more personlized use case.
+more personalized use case.
 
 ####Some Expectations
 
@@ -35,7 +35,7 @@ in it's own `<div></div>` tags allowing the instance to apply CSS and
 insert canvas'. Beyond this, the image must also have an associated
 map via the images 'usemap' attribute. Lastly, an ID, denoted by
 `data-cl-uid="some_id"` needs to be placed on every area element that
-clicklight will be responsable for. Every area without this ID will
+clicklight will be responsible for. Every area without this ID will
 raise an exception and be ignored by clicklight.
 
 Prior to instantiation, this would be considered proper setup:
@@ -53,10 +53,11 @@ Prior to instantiation, this would be considered proper setup:
 ####Instantiation
 
 Working with the above HTML as our webpage, we can now look into
-instantiating the plugin. This is fiarl simple and be done in only one
-of two ways. Either with or without a configuration object. How you
-set up the config is up to you, I will do a basic full defaults as
-well as a simple config to showcase both approaches.
+instantiating the plugin. This is fairly simple and can be done in
+only one of two ways, either with or without a configuration
+object. How you set up this config is up to you, I will do a fully
+default instance as well as a simple configured instance to show both
+approaches.
 
 A fully default instantiation would look like this:
 
@@ -85,7 +86,7 @@ As simply as that, there is now a fully functional instance on our webpage.
 
 Clicklight provides a simple config object that can be set during
 instantiation and reset at any point during runtime. For those curious
-waht the actual code looks like, the default config is as follows:
+what the actual code looks like, the default config is as follows:
 
 ```javascript
 var defaults = {
@@ -135,12 +136,12 @@ changing them will not effect the plugin's default behavior.
 Turning now to the few remaining properties of this object, we see
 `alpha`, `hoverColor` and `clickColor`. These are the properties used
 by the defaults to actually decide what color , and how much of said
-color, to use when a given event is fired. When overriding defualts,
+color, to use when a given event is fired. When overriding defaults,
 you do not have to use these values and can instead provide your
 own. What these properties do show is what the clicklight structure
-expects in terms of 'color syntax'. Becuase of the way canvasing
+expects in terms of 'color syntax'. Because of the way canvasing
 works, the RGB color scheme was chosen as the plugins standard. Any
-defined functionality will have to adhear to this standard.
+defined functionality will have to adhere to this standard.
 
 This config structure allows for a few levels of complexity. First and
 foremost you can change the color and opacity of the different
