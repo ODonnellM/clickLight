@@ -183,32 +183,30 @@ more sense:
 1. `set(id, color);`
   * Set accepts two arguments, an ID representing an existing group
     and an RGB color value to set that group to.
-  * The color passed to set is also saved as the most recent color
-    in the groups state for access later by other methods.
-2. `setTransient(id, color);` 
-  * setTransient accepts the same two arguments as set and applies
+  * The color passed to set is saved as the 'current' color in the
+    groups state for access later by other methods.
+    2. `setTransient(id, color);`
+  * SetTransient accepts the same two arguments as set and applies
     them in the same exact way, on the webpage the two methods will
     appear to be acting the same.
   * The color passed to setTransient is **not** saved to the groups
-    state however. This works well in conjunction with reset for hover
-    events.
+    state however, it simply applies the color.
 3. `reset(id);`
   * Reset accepts only one argument, the ID of the group you would
-    like to reset. Reset will look at the most recent color in a
-    groups state and apply that color onto the group.
+    like to reset. Reset will look at the groups 'current' color in
+    state and apply that color onto the group.
   * Unlike set, reset does not change the state of the group, it only
-    applies the color that a groups state has as most recent.
+    applies the color that a group's state has as 'current'.
 4. `resetState(id);`
   * ResetState accepts only one argument just like reset. The ID of
     the group you would like to reset the state of.
-  * First, resetState will set teh most recent color to null so it's
-    as if nothings been set. Then, it will clear any color it
-    currently has placed on the canvas.
+  * First, resetState will set the 'current' color in state to
+    null. Then, it will clear any color currently on the canvas.
 5. `updateConfig(config);`
   * If at any point you want to update the configuration of an
     instance during run time, this is the method that'll help you do
-    so
+    so.
   * It works by simple re-extending the settings object internally
     which is referenced throughout the plugin's lifecycle including
-    all callbacks and defualt color references.
+    all callbacks and default color references.
 
