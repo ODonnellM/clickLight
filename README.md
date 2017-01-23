@@ -22,19 +22,19 @@ can incorporate this open design into your own project dealing with a
 more personlized use case.
 
 ####Some Expectations
-
 Using clicklight is as simple as calling it on the image or collection
 of images you want to apply it to. The system expects these images to
 be passed in via the jQuery selector used when calling clicklight.
 
-In addition, clicklight expects the image in question to be wrapped in
-`<div></div>` tags allowing it to apply CSS and insert a canvas per
+In addition, clicklight expects the image(s) in question to be wrapped
+in `<div></div>` tags allowing it to apply CSS and insert a canvas per
 image into the webpage. Beyond this, the image must also have an
 associated map via the images 'usemap' attribute. Lastly, an ID,
-denoted by: `data-cl-uid="some_id"` needs to be placed on every area
-element that clicklight will be responsible for. Every area without
-this ID will raise an exception and be ignored by clicklight. Prior to
-instantiation, this would be considered proper setup:
+denoted by - `data-cl-uid="some_id"` - needs to be placed on every
+area element that clicklight will be responsible for. Every area
+without this ID will raise an exception and be ignored by clicklight.
+
+Prior to instantiation, this would be considered proper setup:
 
   ```html
    <div>
@@ -47,7 +47,14 @@ instantiation, this would be considered proper setup:
    ```
    
 ####Instantiation
-Assuming we are working with the above HTML as our webpage, we can now look into instantiating the plugin. This would
+
+Working with the above HTML as our webpage, we can now look into
+instantiating the plugin. This is fiarl simple and be done in only one
+of two ways. Either with or without a configuration object. How you
+set up the config is up to you, I will do a basic full defaults as
+well as a simple config to showcase both approaches.
+
+A fully default instantiation would look like this:
 
   ```javascript
   $(function() {
@@ -55,7 +62,20 @@ Assuming we are working with the above HTML as our webpage, we can now look into
   });
   ```
 
+While adding in some of our own config options would look like this:
 
+  ```javascript
+  $(function() {
+    $('.toSelect').clicklight({
+	  onClick : function(inst, id) {
+	    console.log(this, 'was just clicked!');
+	  },
+	  hoverColor : '150, 150, 150'
+	});
+  });
+  ```
+
+As simply as that, there is now a fully functional instance on our webpage.
 
 ####Configuration
 Clicklight provides a fairly simple settings object that can be set during instantiation as well as at any point during runtime assuming you have a named instance to access. The default settings are as follows:
