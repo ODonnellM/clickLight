@@ -1,18 +1,41 @@
 # Clicklight.js
 ##About
-Clicklight is a	jQuery plugin developed	for use	with image maps	where highlighting is necessary. Using a simple and modular api, a clicklight instance can hook onto any image with an associated map and immediatley start providing functionality. For those wanting a more customized use case, digging deeper into the plugin through callbacks and overwrites of default behavior is also possible.
+Clicklight is a jQuery plugin developed for use with image maps where
+highlighting is necessary. Using a simple and modular api, a
+clicklight instance can hook onto any image with an associated map and
+immediatley start providing functionality. For those wanting a more
+customized use case, digging deeper into the plugin through callbacks
+and overwrites of default behavior is also possible.
 
 ##Dependancies
-Clicklight has not yet been tested on all browsers but should function without incident on any browser with support for HTML 5's canvasing.
+Clicklight has not yet been tested on all browsers but should function
+without incident on any browser with support for HTML 5's canvasing.
 
-This plugin was built over jQuery 3.1.1. Any issues with other versions will be noted here as issues are discovered.
+This plugin was built over jQuery 3.1.1. Any issues with other
+versions will be noted here as issues are discovered.
 
 ##Using the plugin
-Using clicklight.js is fairly simple in most cases, but can also be built into just about any ecosystem where it's needed. Walking through the more basic functionality of the plugin should give you an idea as to how you can incorporate this open design into your own project on a more personlized use case.
-####Some Expectations
-Using clicklight is as simple as calling it on the image you want to apply it to.
+Using clicklight.js is fairly simple in most cases, and can still be
+easily built into just about any ecosystem where it's funcionality is
+needed. Walking through the basics should give you an idea of how you
+can incorporate this open design into your own project dealing with a
+more personlized use case.
 
-However, clicklight expects the image in question to be wrapped in `<div></div>` tags so it can apply CSS and insert a canvas into the webpage. The image must also have an associated map through the images 'usemap' attribute. In addition to this, an ID `data-cl-uid="some_id"` needs to be placed on every area element that clicklight will be responsible for. Every area without this ID will raise an exception and be ignored by clicklight. Prior to instantiation, this would be considered proper setup
+####Some Expectations
+
+Using clicklight is as simple as calling it on the image or collection
+of images you want to apply it to. The system expects these images to
+be passed in via the jQuery selector used when calling clicklight.
+
+In addition, clicklight expects the image in question to be wrapped in
+`<div></div>` tags allowing it to apply CSS and insert a canvas per
+image into the webpage. Beyond this, the image must also have an
+associated map via the images 'usemap' attribute. Lastly, an ID,
+denoted by: `data-cl-uid="some_id"` needs to be placed on every area
+element that clicklight will be responsible for. Every area without
+this ID will raise an exception and be ignored by clicklight. Prior to
+instantiation, this would be considered proper setup:
+
   ```html
    <div>
      <img src="/some/img/src" usemap="#mapName" class="toSelect">
