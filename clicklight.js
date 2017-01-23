@@ -56,7 +56,7 @@
 
   function _val_id (id, inst) {
     if (!inst.group[id]) {
-      console.log("ERROR: no group '"+id+"' found in instance '"+ inst.id||"anonymous" +"'");
+      console.log("ERROR: No group '"+id+"' found in instance '"+ inst.id||"anonymous" +"'");
       return false;
     } return true;
   }
@@ -117,7 +117,7 @@
     var group = [];
     var id    = $area.attr('data-cl-uid') || null;
     if (!id) {
-      console.log('ERROR: no `data-cl-uid` found on area\n', $area, 'will be skipped');
+      console.log('ERROR: No `data-cl-uid` found on area\n', $area, 'will be skipped');
       return undefined;
     }
 
@@ -182,7 +182,7 @@
     if (!args[0] || typeof args[0] === 'object') {
       this.each(function() {
         if (!$(this).is('img'))
-          console.log('ERROR: Clicklight can only be instantiated on images\n', this, 'will be skipped');
+          console.log('ERROR: Clicklight can only be instantiated on images-\n', this, 'will be skipped');
         else
           $.data(this, 'cl-instance') ?
             console.log('ERROR: Clicklight cannot be instantiated twice on', this) :
@@ -193,14 +193,14 @@
         this.each(function() {
           var inst = $.data(this, 'cl-instance')||null;
           if (!inst)
-            console.log('ERROR: no Clicklight instance found on', this);
+            console.log('ERROR: No Clicklight instance found on', this);
           else
             inst[args[0]].apply(inst, args.slice(1));
         });
       } else
-        console.log('ERROR: Unknown method call', args[0]);
+        console.log('ERROR: Clicklight received unknown method call', args[0]);
     } else
-      console.log('ERROR: unknown call on clicklight with argument', args[0]);
+      console.log('ERROR: Clicklight received unknown argument ', args[0]);
 
     return this;
   }
