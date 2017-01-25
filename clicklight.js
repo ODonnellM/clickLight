@@ -177,7 +177,7 @@
 
   $.extend(Clicklight.prototype, public_api);
   $.fn[pluginName] = function () {
-    var args = arguments?[].slice.call(arguments):null, inst;
+    var args = arguments?[].slice.call(arguments):null;
 
     if (!args[0] || typeof args[0] === 'object') {
       this.each(function() {
@@ -187,7 +187,7 @@
           if($.data(this, 'cl-instance'))
             console.log('ERROR: Clicklight cannot be instantiated twice on', this);
           else {
-            inst = new Clicklight(this, args[0]||null);
+            var inst = new Clicklight(this, args[0]||null);
             $.data(this, 'cl-instance', inst);
             if (typeof inst.settings.onConfigured === 'function')
               inst.settings.onConfigured.call(this, inst);
