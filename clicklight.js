@@ -183,10 +183,16 @@
       this.each(function() {
         if (!$(this).is('img'))
           console.log('ERROR: Clicklight can only be instantiated on images-\n', this, 'will be skipped');
-        else
-          $.data(this, 'cl-instance') ?
-            console.log('ERROR: Clicklight cannot be instantiated twice on', this) :
-            $.data(this, 'cl-instance', new Clicklight(this, args[0]||null));
+        else {
+          if($.data(this, 'cl-instance'))
+            console.log('ERROR: Clicklight cannot be instantiated twice on', this);
+          else {
+            inst = new Clicklight(this, args[0]||null);
+            $.data(this, 'cl-instance', inst);
+            if (typeof inst.settings.onConfigured === 'function')
+              inst.settings.onConfigured.call(this, inst);
+          }
+        }
       });
     } else if (typeof args[0] === 'string') {
       if (args[0] in public_api) {
