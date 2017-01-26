@@ -2,14 +2,13 @@
 
 Clicklight is a small event driven jQuery plugin that allows images to
 be highlighted through the use of HTML 5 image maps and canvasing. By
-providing a clean and open API, Clicklight is easy to use and doesn't
-get in the way of any project it is built into.
+providing a clean and open API, it is easy to use and doesn't get in
+the way of any project it is built into.
 
 Clicklight was built after being unable to find an equivalently small
-plugin that allows images to be used as hooks into a sites
-functionality. Focusing only on what this plugin does allows for a
-very small footprint while still allowing for endless unique uses to
-fit any project.
+plugin that allows images to be higlighted and used as hooks into a
+sites functionality. Focused only on a fairly featureless design allows for
+a very small footprint while still allowing for endless unique uses.
 
 ## Demo's
 
