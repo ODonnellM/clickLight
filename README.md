@@ -162,4 +162,37 @@ var defaults = {
 
 ## The API
 
-there are some methods and you can use them
+Clicklight provides five methods that can be called through the
+clicklight function itself by passing string identifiers into an
+instance.
+
+For manipulating state there are four methods and a fifth for updating
+the config file during runtime
+
+```javascript
+$('#thisImg').clicklight('set', 'ID', 'COLOR');
+// set takes a group id and color to set the given group to. Current
+// color will be set to the passed color internally
+
+$('#thisImg').clicklight('reset', 'ID');
+// reset takes a group id and sets the color to whatever is internally
+// saved as current color
+
+$('#thisImg').clicklight('setTransient', 'ID', 'COLOR');
+// set takes a group id and color to set the given group to. Current
+// color is not changed internally
+
+$('#thisImg').clicklight('resetState', 'ID');
+// resetState takes a group id to remove color from as well as delete
+// the current color saved internally
+
+$('#thisImg').clicklight('updateConfig', {/*new config object*/});
+// updateConfig takes the very same config object described above in
+// case something needs to be changed during runtime
+```
+
+## Limitations
+
+* Color's need to be RGB string values
+* no method for deletion of an instance
+* only area tags of type 'rectangle' will work
