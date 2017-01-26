@@ -56,7 +56,7 @@
 
   function _val_id (id, inst) {
     if (!inst.group[id]) {
-      console.log("ERROR: No group '"+id+"' found in instance '"+ inst.id||"anonymous" +"'");
+      console.log("ERROR: No group '"+id+"' found in instance", inst);
       return false;
     } return true;
   }
