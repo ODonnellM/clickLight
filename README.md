@@ -1,6 +1,6 @@
 # Clicklight.js
 
-Clicklight is a small event driven jQuery plugin that allows images to
+Clicklight is an small event driven jQuery plugin that allows images to
 be highlighted through the use of HTML 5 image maps and canvasing. By
 providing a clean and open API, it is easy to use and doesn't get in
 the way of any project it is built into.
@@ -10,10 +10,6 @@ plugin that allows images to be higlighted and used as hooks into a
 sites functionality. Focused only on highlighting and providing
 callbacks, clicklight retains a small footprint while still
 allowing for endless unique uses.
-
-## Demo's
-
-Coming soon
 
 ## Dependencies
 
@@ -55,19 +51,13 @@ Then we can call the clicklight function on the image like so:
 ```javascript
 $(function() {
 
-  $('#thisImg').clicklight({
-    hoverColor : '255, 0, 0',
-	alpha      : '0.6',
-	onClick    : function (inst, id) {
-	  console.log(this, 'is being highlighted!');
-	}
-  });
+  $('#thisImg').clicklight();
 
 });
 ```
 ## Configuration
 
-#### Base config object
+#### Default config object
 
 ```javascript
 var defaults = {
@@ -108,6 +98,13 @@ their `cl-uid` attribute, executed functions operate on their group,
 not just the element that fired the event. Any of the following can be
 overwritten.
 
+#### Callbacks
+|Event        | Primary Call | call back  |
+|:-----------:|:------------:|:----------:|
+| click       | clicked      | clicked    |
+| mouse enter | mouseOver    | mouseOver  |
+| mouse leave | mouseLeave   | mouseLeave |
+
 #### Default Functionality
 * `clicked`    - will set `clickColor`
 * `mouseOver`  - will temporarily set `hoverColor`
@@ -131,7 +128,7 @@ The final callback is `onConfigured`, as you may have guessed, is
 called when a new instance has been built. `this` will point to the
 image it was instatiated on and one argument `inst` is provided as
 well :
-* `onConfigured : function(inst) { /*logic* }`
+* `onConfigured : function(inst) { /*logic*/ }`
 
 #### Properties
 
