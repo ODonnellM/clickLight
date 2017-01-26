@@ -19,12 +19,12 @@ Coming soon
 
 Clicklight only expects a fe things to be done prior to
 instantiation:
-* - an image with an assoicated image map has to be present on the
-    page
+* an image with an assoicated image map has to be present on the page
 	
-* - the `<img>` tag needs to be wrapped in a `<div>` tag
+* `<img>` tags needs to be wrapped in a `<div>` tags
 
-* - each `<area>` tag to be managed is recquired to have a `data-cl-uid="userSetID"` on it.
+* Each `<area>` tag to be managed is recquired to have a
+  `data-cl-uid="userSetID"` on it.
 
 
 
