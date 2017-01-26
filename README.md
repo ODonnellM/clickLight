@@ -34,11 +34,10 @@ instantiation:
 
 * an image with an assoicated image map has to be present on the page
 	
-* `<img>` tags needs to be wrapped in a `<div>` tags
+* `<img>` tags needs to be wrapped in `<div>` tags
 
 * Each `<area>` tag to be managed is recquired to have a
   `data-cl-uid="userSetID"` on it.
-
 
 ```html
 <div>
