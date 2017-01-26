@@ -91,24 +91,24 @@ All the above functions are all called with the same arguments where
 `this` is the element that fired the event, `inst` is the active
 instance and `id` is the id of the group the element is a part of,
 structured like so: 
-
-   `onClick : function(inst, id) { /*logic*/ }`
+* `onClick : function(inst, id) { /*logic*/ }`
 
 The final callback is `onConfigured`, as you may have guessed, is
 called when a new instance has been built. `this` will point to the
 image it was instatiated on and one argument `inst` is provided as
 well :
-
-   `onConfigured : function(inst) { /*logic* }`
+* `onConfigured : function(inst) { /*logic* }`
    
 #### Properties
 
-The final peices available for edit in the config are `alpha`,
+The final pieces available for edit in the config are `alpha`,
 `hoverColor` and `clickColor`.
 
-   `alpha` is used to changed opacity of a color by setting a value
+* `alpha` is used to changed opacity of a color by setting a value
    between 0.0 and 1.0
   
-   `clickColor` is the default color used when setting colors on click events
+* `clickColor` is the default color used when setting colors on click
+  events
 
-   `hoverColor` is the default color used when setting colors on hover events
+* `hoverColor` is the default color used when setting colors on hover
+  events
