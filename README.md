@@ -77,7 +77,7 @@ overwritten.
 #### Default Functionality
 * `clicked`    - will set `clickColor`
 * `mouseOver`  - will temporarily set `hoverColor` 
-* `mouseLeave` - will reset back to last `set` color
+* `mouseLeave` - will reset back to last `set` color or blank
 
 #### Callbacks 
 All callbacks are initialized to null and will be called by their
@@ -90,10 +90,12 @@ respective default functions if defined.
 All the above functions are all called with the same arguments where
 `this` is the element that fired the event, `inst` is the active
 instance and `id` is the id of the group the element is a part of,
-structured like so: `onClick : function(inst, id) { /*logic*/ }`
+structured like so: 
+> `onClick : function(inst, id) { /*logic*/ }`
 
 The final callback is `onConfigured`, as you may have guessed, this is
 called when a new instance has been built. `this` will point to the
 image it was instatiated on and one argument `inst` is provided as
-well : `onConfigured : function(inst) { /*logic* }`
+well :
+> `onConfigured : function(inst) { /*logic* }`
 
