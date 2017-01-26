@@ -1,18 +1,17 @@
-# Clicklight.js
+# clicklight.js
 
 Clicklight is an event driven jQuery plugin that highlights HTML image
 maps useing HTML 5 canvasing. Clicklight was built after being unable
-to find an equivalently small plugin that allows images to be
-higlighted and used as hooks into a sites functionality. Focused only
+to find a comparably small plugin with similar functionality. Focused only
 on highlighting and providing callbacks, clicklight retains a small
-footprint while still allowing for endless unique uses.
+footprint while allowing endless unique uses.
 
 ## Dependencies
 
 Clicklight has not yet been browser tested, however, it operates off
 HTML 5's canvasing which means all the latest browsers with such
-support will be fine. As testing is done, a more formal list will be
-put here.
+support should be fine. As testing is done over the coming days, a more formal
+list will be put here.
 
 Clicklight was designed around jQuery 3.1 but is compatible as far
 back as jQuery 1.7
@@ -21,15 +20,16 @@ back as jQuery 1.7
 
 Clicklight only expects a few things to be done prior to
 instantiation:
-* the clicklight.js file needs to be included within a script tag via
-  this github or by downloading the file locally
+* jQuery 1.7 or newer
 
-* an image with an assoicated image map has to be present on the page
+* clicklight.js file
+
+* image with an assoicated image map
 
 * `<img>` tags needs to be wrapped in `<div>` tags
 
-* Each `<area>` tag to be managed is recquired to have a
-  `data-cl-uid="userSetID"` on it.
+* `<area>` tags to be managed are recquired to have a
+  `data-cl-uid="userSetID"` on each.
 
 ```html
 <div>
@@ -42,7 +42,7 @@ instantiation:
   <area shape="rect" alt="" coords="x1,y1,x2,y2" href="#" data-cl-uid="2" title="example">
 </map>
 ```
-Then we can call the clicklight function on the image like so:
+Now call the clicklight function on the image
 
 ```javascript
 $(function() {
@@ -53,10 +53,10 @@ $(function() {
 ```
 ## Configuration
 
-Here are the various config options you can pass to clicklight broken
-into 3 sections. Becuase area's can be grouped via their `data-cl-uid`
-attribute, executed functions operate on their group, not just the
-element that fired the event. Any of the following can be overwritten.
+Here are the various config options you can pass to clicklight.
+Becuase area's can be grouped via their `data-cl-uid` attribute,
+executed functions operate on their group, not just the element
+that fired the event. Any of the following can be overwritten.
 
 #### Primary Call's
 * `clicked`    - will set `clickColor`
