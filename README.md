@@ -105,9 +105,7 @@ The final pieces available for edit in the config are `alpha`,
 
 * `alpha` is used to changed opacity of a color by setting a value
    between 0.0 and 1.0
-  
 * `clickColor` is the default color used when setting colors on click
   events
-
 * `hoverColor` is the default color used when setting colors on hover
   events
