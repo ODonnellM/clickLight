@@ -67,6 +67,41 @@ $(function() {
 ```
 ## Configuration
 
+#### Base config object
+
+```javascript
+var defaults = {
+  clicked      : function (inst, id) {
+    if (inst.group[id].is_set)
+      inst.resetState(id);
+    else
+      inst.set(id, inst.settings.clickColor);
+    inst.group[id].is_set = !inst.group[id].is_set;
+
+    if (typeof inst.settings.onClick === 'function')
+      inst.settings.onClick.call(this, inst, id);
+  },
+  mouseOver    : function (inst, id) {
+    inst.setTransient(id, inst.settings.hoverColor);
+
+    if (typeof inst.settings.onHover === 'function')
+      inst.settings.onHover.call(this, inst, id);
+  },
+  mouseLeave   : function (inst, id) {
+    inst.reset(id);
+
+    if (typeof inst.settings.noHover === 'function')
+      inst.settings.noHover.call(this, inst, id);
+  },
+  onConfigured : null,
+  onClick      : null,
+  onHover      : null,
+  noHover      : null,
+  alpha        : '0.4',
+  hoverColor   : '0, 255, 255',
+  clickColor   : '255, 0, 0'
+};
+```
 Here are the various config options you can pass to clicklight broken
 into 3 sections based on their use. Becuase area's can be grouped via
 their `cl-uid` attribute, executed functions operate on their group,
@@ -101,7 +136,7 @@ well :
 #### Properties
 
 The final pieces available for edit in the config are `alpha`,
-`hoverColor` and `clickColor`.
+`hoverColor` and `clickColor`:
 
 * `alpha` is used to changed opacity of a color by setting a value
    between 0.0 and 1.0
@@ -109,3 +144,4 @@ The final pieces available for edit in the config are `alpha`,
   events
 * `hoverColor` is the default color used when setting colors on hover
   events
+
