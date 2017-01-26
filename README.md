@@ -1,7 +1,7 @@
 # clicklight.js
 
 Clicklight is an event driven jQuery plugin that highlights HTML image
-maps useing HTML 5 canvasing. Clicklight was built after being unable
+maps using HTML 5 canvasing. Clicklight was built after being unable
 to find a comparably small plugin with similar functionality. Focused only
 on highlighting and providing callbacks, clicklight retains a small
 footprint while allowing endless unique uses.
