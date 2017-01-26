@@ -15,6 +15,16 @@ allowing for endless unique uses.
 
 Coming soon
 
+## Dependencies
+
+Clicklight has not yet been browser tested, however, it operates off
+HTML 5's canvasing which means all the latest browsers with such
+support will be fine. As testing is done, a more formal list will be
+put here.
+
+Clicklight was designed around jQuery 3.1 but is compatible as far
+back as jQuery 1.7
+
 ## Basic usage and setup
 
 Clicklight only expects a few things to be done prior to
@@ -56,3 +66,34 @@ $(function() {
 
 });
 ```
+## Configuration
+
+Here are the various config options you can pass to clicklight broken
+into 3 sections based on their use. Becuase area's can be grouped via
+their `cl-uid` attribute, executed functions operate on their group,
+not just the element that fired the event. Any of the following can be
+overwritten.
+
+#### Default Functionality
+* `clicked`    - will set `clickColor`
+* `mouseOver`  - will temporarily set `hoverColor` 
+* `mouseLeave` - will reset back to last `set` color
+
+#### Callbacks 
+All callbacks are initialized to null and will be called by their
+respective default functions if defined.
+
+* `onClick` - called by `clicked`
+* `onHover` - called by `mouseOver`
+* `noHover` - called by `mouseLeave`
+
+All the above functions are all called with the same arguments where
+`this` is the element that fired the event, `inst` is the active
+instance and `id` is the id of the group the element is a part of,
+structured like so: `onClick : function(inst, id) { /*logic*/ }`
+
+The final callback is `onConfigured`, as you may have guessed, this is
+called when a new instance has been built. `this` will point to the
+image it was instatiated on and one argument `inst` is provided as
+well : `onConfigured : function(inst) { /*logic* }`
+
