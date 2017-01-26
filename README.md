@@ -164,7 +164,9 @@ var defaults = {
 
 Clicklight provides five methods that can be called through the
 clicklight function itself by passing string identifiers into an
-instance.
+instance. Each instance is tied to the image it was built on, to
+get back at it, just call clicklight on the image you want to
+affect the instance of.
 
 For manipulating state there are four methods and a fifth for updating
 the config file during runtime
