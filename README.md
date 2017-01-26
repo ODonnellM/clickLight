@@ -110,8 +110,7 @@ $(function() {
   $('#thisImg').clicklight({
     clickColor : '255, 255, 0',
 	alpha      : '0.6',
-	onHover    : function (inst, id) {
-	},
+	clickColor : '255, 200, 0',
 	onClick    : function (inst, id) {
 	  console.log(this, 'was just clicked and is in group', id);
 	}
