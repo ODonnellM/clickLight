@@ -9,8 +9,9 @@ The plugin has a small footprint and has no dependencies other than jQuery 1.7+ 
 Clicklight was specifically designed to be small and nimble, hiding the gory details of HTML5 canvas under a small, clean API. It has very little built-in functionality. If you need a more featureful solution, you may want to have a look at the venerable ImageMapster plugin.
 
 Clicklight can exist in one of two states
+
 1. Instantiation where nothing or a config object is passed in to build an instance
-2. Method calling by passing string identifiers of the provide API
+2. Method calls via passing string identifiers followed by arguments
 
 ## Setup
 
@@ -44,14 +45,10 @@ $(function() {
 
 ## The API
 
-Clicklight provides five methods that can be called through the
-clicklight function itself by passing string identifiers into an
-instance. Each instance is tied to the image it was built on, to
-get back at it, just call clicklight on the image you want to
-affect the instance of.
-
-For manipulating state there are four methods and a fifth for updating
-the config file during runtime
+Clicklight provides methods that can be called through
+clicklight by passing string identifiers into an instance.
+Each instance is tied to the image it was built on, to get
+back at it, just call clicklight on the image you want the instance of.
 
 ```javascript
 $('#thisImg').clicklight('set', 'ID', 'COLOR');
@@ -100,8 +97,8 @@ if defined, above callbacks will fire secondary callbacks below
 * `noHover`
 
 listed callbacks are called with the same arguments where 
-* `this` is the element that fired the event/callback
-* `inst` is the active instance
+* `this` element that fired event/callback
+* `inst` active instance
 * `id` group of the element 
 
 which looks like so in a define
