@@ -1,28 +1,16 @@
 # clicklight.js
 
-Clicklight is an event driven jQuery plugin that highlights HTML image
-maps using HTML 5 canvasing. Clicklight was built after being unable
-to find a comparably small plugin with similar functionality. Focused only
-on highlighting and providing callbacks, clicklight retains a small
-footprint while allowing endless unique uses.
+Clicklight is a jQuery plugin to work with HTML image maps.
 
-## Dependencies
+The plugin provides hover and click event handlers as well as callbacks to manipulate the color and opacity of mapped areas.
 
-Clicklight has not yet been browser tested, however, it operates off
-HTML 5's canvasing which means all the latest browsers with such
-support should be fine. As testing is done over the coming days, a more formal
-list will be put here.
+The plugin has a small footprint and has no dependencies other than jQuery 1.7+ and a browser that supports HTML5 canvas.
 
-Clicklight was designed around jQuery 3.1 but is compatible as far
-back as jQuery 1.7
+Clicklight was specifically designed to be small and nimble, hiding the gory details of HTML5 canvas under a small, clean API. It has very little built-in functionality. If you need a more featureful solution, you may want to have a look at the venerable ImageMapster plugin.
 
-## Basic usage and setup
+## Setup
 
-Clicklight only expects a few things to be done prior to
-instantiation:
-* jQuery 1.7 or newer
-
-* clicklight.js file
+Clicklight expects
 
 * image with an assoicated image map
 
@@ -42,7 +30,7 @@ instantiation:
   <area shape="rect" alt="" coords="x1,y1,x2,y2" href="#" data-cl-uid="2" title="example">
 </map>
 ```
-Now call the clicklight function on the image
+Call the clicklight function on the image
 
 ```javascript
 $(function() {
@@ -53,53 +41,47 @@ $(function() {
 ```
 ## Configuration
 
-Here are the various config options you can pass to clicklight.
-Becuase area's can be grouped via their `data-cl-uid` attribute,
-executed functions operate on their group, not just the element
-that fired the event. Any of the following can be overwritten.
+Clicklight config can be used as default or overwritten via the provided callbacks.
 
-#### Primary Call's
-* `clicked`    - will set `clickColor`
-* `mouseOver`  - will temporarily set `hoverColor`
-* `mouseLeave` - will reset back to last `set` color or blank
+#### Properties
 
-All functions above are called with the same arguments where `this` is
-the element that fired the event, `inst` is the active instance and
-`id` is the id of the group the element is a part of
+* `alpha` opacity of colors between 0.0 and 1.0
+* `clickColor` default color used on clicks
+* `hoverColor` default color used on mouse over
+  
+`hoverColor` and `clickColor` only accept RGB strings
+
+#### Callbacks
+
+the default callbacks and basic behavior 
+
+* `clicked`    - sets a color
+* `mouseOver`  - temporarily sets `hoverColor`
+* `mouseLeave` - resets to last `set` color or clears
+
+above callbacks will fire their respective callbacks if defined by you
+
+* `onClick`
+* `onHover`
+* `noHover`
+
+
+Callbacks are called with the same arguments where 
+* `this` is the element that fired the event
+* `inst` is the active instance
+* `id` is the id of the group the element 
+
+This looks like 
+
 * `onClick : function(inst, id) { /*logic*/ }`
 
-#### Call order
-
-|   Event   |Primary Call|call back|
-|:---------:|:----------:|:-------:|
-|   click   |  clicked   | onClick |
-|mouse enter| mouseOver  | onHover |
-|mouse leave| mouseLeave | noHover |
-
-All callbacks are initialized to null and if defined, will be called
-by their respective primary functions.
 
 The final callback is `onConfigured`, as you may have guessed, is
 called when a new instance has been built. `this` will point to the
 image it was instatiated on while one argument `inst` is provided
 * `onConfigured : function(inst) { /*logic*/ }`
 
-#### Properties
-
-The final pieces available for edit in the config are `alpha`,
-`hoverColor` and `clickColor`:
-
-* `alpha` is used to changed opacity of a color by setting a value
-   between 0.0 and 1.0
-* `clickColor` is the default color used when setting colors on click
-  events
-* `hoverColor` is the default color used when setting colors on hover
-  events
-  
-As of right now, `hoverColor` and `clickColor` only accept strings of
-RGB as color codes
-
-### Basic usage with a config object
+### using the config
 
 To give our config object to clicklight, we just pass it in while
 instantiating
