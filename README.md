@@ -2,15 +2,21 @@
 
 Clicklight is a jQuery plugin to work with HTML image maps.
 
-The plugin provides hover and click event handlers as well as callbacks to manipulate the color and opacity of mapped areas.
+The plugin provides hover and click event handlers as well as
+callbacks to manipulate the color and opacity of mapped areas.
 
-The plugin has a small footprint and has no dependencies other than jQuery 1.7+ and a browser that supports HTML5 canvas.
+The plugin has a small footprint and has no dependencies other than
+jQuery 1.7+ and a browser that supports HTML5 canvas.
 
-Clicklight was specifically designed to be small and nimble, hiding the gory details of HTML5 canvas under a small, clean API. It has very little built-in functionality. If you need a more featureful solution, you may want to have a look at the venerable ImageMapster plugin.
+Clicklight was specifically designed to be small and nimble, hiding
+the gory details of HTML5 canvas under a small, clean API. It has very
+little built-in functionality. If you need a more featureful solution,
+you may want to have a look at the venerable ImageMapster plugin.
 
 Clicklight can exist in one of two states
 
-1. Instantiation where nothing or a config object is passed in to build an instance
+1. Instantiation where nothing or a config object is passed in to
+build an instance
 2. Method calls via passing string identifiers followed by arguments
 
 ## Setup
@@ -45,10 +51,10 @@ $(function() {
 
 ## The API
 
-Clicklight provides methods that can be called through
-clicklight by passing string identifiers into an instance.
-Each instance is tied to the image it was built on, to get
-back at it, just call clicklight on the image you want the instance of.
+Clicklight provides methods that can be called through clicklight by
+passing string identifiers into an instance.  Each instance is tied to
+the image it was built on, to get back at it, just call clicklight on
+the image you want the instance of.
 
 ```javascript
 $('#thisImg').clicklight('set', 'ID', 'COLOR');
@@ -74,19 +80,20 @@ $('#thisImg').clicklight('updateConfig', {/*new config object*/});
 
 ## Configuration
 
-Clicklight config can be used as default or overwritten via the provided callbacks.
+Clicklight config can be used as default or overwritten via the
+provided callbacks.
 
 #### Properties
 
 * `alpha` opacity of colors between 0.0 and 1.0
 * `clickColor` default color used on clicks
 * `hoverColor` default color used on mouse over
-  
+
 `hoverColor` and `clickColor` only accept RGB strings
 
 #### Callbacks
 
-the default callbacks and basic behavior 
+the default callbacks and basic behavior
 * `clicked`    - sets a color
 * `mouseOver`  - temporarily sets `hoverColor`
 * `mouseLeave` - resets to last `set` color or clears
@@ -96,14 +103,13 @@ if defined, above callbacks will fire secondary callbacks below
 * `onHover`
 * `noHover`
 
-listed callbacks are called with the same arguments where 
+listed callbacks are called with the same arguments where
 * `this` element that fired event/callback
 * `inst` active instance
-* `id` group of the element 
+* `id` group of the element
 
-which looks like so in a define
+which looks like so in when defining
 * `onClick : function(inst, id) { /*logic*/ }`
-
 
 The last callback is `onConfigured` where `this` will point to the
 image it was instatiated on while one argument `inst` is provided
