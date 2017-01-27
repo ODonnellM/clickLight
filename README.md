@@ -8,14 +8,16 @@ The plugin has a small footprint and has no dependencies other than jQuery 1.7+ 
 
 Clicklight was specifically designed to be small and nimble, hiding the gory details of HTML5 canvas under a small, clean API. It has very little built-in functionality. If you need a more featureful solution, you may want to have a look at the venerable ImageMapster plugin.
 
+Clicklight can exist in one of two states
+1. Instantiation where nothing or a config object is passed in to build an instance
+2. Method calling by passing string identifiers of the provide API
+
 ## Setup
 
 Clicklight expects
 
 * image with an assoicated image map
-
 * `<img>` tags needs to be wrapped in `<div>` tags
-
 * `<area>` tags to be managed are recquired to have a
   `data-cl-uid="userSetID"` on each.
 
@@ -39,6 +41,40 @@ $(function() {
 
 });
 ```
+
+## The API
+
+Clicklight provides five methods that can be called through the
+clicklight function itself by passing string identifiers into an
+instance. Each instance is tied to the image it was built on, to
+get back at it, just call clicklight on the image you want to
+affect the instance of.
+
+For manipulating state there are four methods and a fifth for updating
+the config file during runtime
+
+```javascript
+$('#thisImg').clicklight('set', 'ID', 'COLOR');
+// set takes a group id and color to set the given group to. Current
+// color will be set to the passed color internally
+
+$('#thisImg').clicklight('reset', 'ID');
+// reset takes a group id and sets the color to whatever is internally
+// saved as current color
+
+$('#thisImg').clicklight('setTransient', 'ID', 'COLOR');
+// setTransient takes a group id and color to set the given group to.
+// Current color is not changed internally
+
+$('#thisImg').clicklight('resetState', 'ID');
+// resetState takes a group id to remove color from as well as clear
+// the current color saved internally
+
+$('#thisImg').clicklight('updateConfig', {/*new config object*/});
+// updateConfig takes the very same config object described above in
+// case something needs to be changed during runtime
+```
+
 ## Configuration
 
 Clicklight config can be used as default or overwritten via the provided callbacks.
@@ -54,34 +90,29 @@ Clicklight config can be used as default or overwritten via the provided callbac
 #### Callbacks
 
 the default callbacks and basic behavior 
-
 * `clicked`    - sets a color
 * `mouseOver`  - temporarily sets `hoverColor`
 * `mouseLeave` - resets to last `set` color or clears
 
-above callbacks will fire their respective callbacks if defined by you
-
+if defined, above callbacks will fire secondary callbacks below
 * `onClick`
 * `onHover`
 * `noHover`
 
-
-Callbacks are called with the same arguments where 
-* `this` is the element that fired the event
+listed callbacks are called with the same arguments where 
+* `this` is the element that fired the event/callback
 * `inst` is the active instance
-* `id` is the id of the group the element 
+* `id` group of the element 
 
-This looks like 
-
+which looks like so in a define
 * `onClick : function(inst, id) { /*logic*/ }`
 
 
-The final callback is `onConfigured`, as you may have guessed, is
-called when a new instance has been built. `this` will point to the
+The last callback is `onConfigured` where `this` will point to the
 image it was instatiated on while one argument `inst` is provided
 * `onConfigured : function(inst) { /*logic*/ }`
 
-### using the config
+### Using the config
 
 To give our config object to clicklight, we just pass it in while
 instantiating
@@ -95,18 +126,18 @@ $(function() {
 	clickColor : '255, 200, 0',
 	onClick    : function (inst, id) {
 	  console.log(this, 'was just clicked and is in group', id);
+	},
+	onConfigured : function (inst) {
+	  console.log(inst, 'is ready for operation!');
 	}
   });
 
 });
 ```
 
-#### Default config object
+#### Config object
 
-For those interested, this is the actual definition of the default
-config object. The API is described below and will give more context
-as to how our default functionality is achieved through the primary
-calls.
+For those interested, this is the definition of the config object.
 
 ```javascript
 var defaults = {
@@ -140,39 +171,6 @@ var defaults = {
   hoverColor   : '0, 255, 255',
   clickColor   : '255, 0, 0'
 };
-```
-
-## The API
-
-Clicklight provides five methods that can be called through the
-clicklight function itself by passing string identifiers into an
-instance. Each instance is tied to the image it was built on, to
-get back at it, just call clicklight on the image you want to
-affect the instance of.
-
-For manipulating state there are four methods and a fifth for updating
-the config file during runtime
-
-```javascript
-$('#thisImg').clicklight('set', 'ID', 'COLOR');
-// set takes a group id and color to set the given group to. Current
-// color will be set to the passed color internally
-
-$('#thisImg').clicklight('reset', 'ID');
-// reset takes a group id and sets the color to whatever is internally
-// saved as current color
-
-$('#thisImg').clicklight('setTransient', 'ID', 'COLOR');
-// set takes a group id and color to set the given group to. Current
-// color is not changed internally
-
-$('#thisImg').clicklight('resetState', 'ID');
-// resetState takes a group id to remove color from as well as delete
-// the current color saved internally
-
-$('#thisImg').clicklight('updateConfig', {/*new config object*/});
-// updateConfig takes the very same config object described above in
-// case something needs to be changed during runtime
 ```
 
 ## Limitations
