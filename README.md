@@ -13,13 +13,13 @@ the gory details of HTML5 canvas under a small, clean API. It has very
 little built-in functionality. If you need a more featureful solution,
 you may want to have a look at the venerable ImageMapster plugin.
 
+## Setup
+
 Clicklight can exist in one of two states
 
 1. Instantiation where nothing or a config object is passed in to
 build an instance
 2. Method calls via passing string identifiers followed by arguments
-
-## Setup
 
 Clicklight expects
 
@@ -181,14 +181,3 @@ $('#thisImg').clicklight('updateConfig', {/*new config object*/});
 * Color's need to be RGB string values
 * no method for deletion of an instance
 * only area tags of type 'rectangle' will work
-
-## Demos and code examples
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-<script type="text/javascript" src="clicklight/clicklight.js"></script>
-<script type="text/javascript">
-  
-  $(function() {
-    $('body').clicklight();
-  });
-  
-</script>
