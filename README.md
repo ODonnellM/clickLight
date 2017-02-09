@@ -25,6 +25,7 @@ you may want to have a look at the venerable ImageMapster plugin.
 #### Installation
 
 `npm install clicklight`
+
 `bower install clicklight`
 
 #### Usage
