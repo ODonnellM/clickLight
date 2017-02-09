@@ -23,6 +23,9 @@ you may want to have a look at the venerable ImageMapster plugin.
   `data-cl-uid="userSetID"` on each.
 #### Usage
 
+In it's most basic form, clicklight applies and removes coloring to
+instantiated mapped areas.
+
 HTML:
 ```html
 <div>
@@ -46,8 +49,8 @@ $(function() {
 
 ### Configuration
 
-Clicklight config can be used as default or overwritten via the
-provided callbacks.
+Clicklight provides a small config object offering 3 properties
+and 7 callbacks
 
 #### Properties
 
@@ -59,27 +62,25 @@ provided callbacks.
 
 #### Callbacks
 
-when defined, the following callbacks will be fired on their respective events
-* `onClick`
-* `onHover`
-* `noHover`
-* `onConfigured`
+Callbacks exist in two levels. First level callbacks are predefined
+with default bahvior. Second level callbacks are called when defined
+with any additional functionality on a given event. All events are tied
+to an instantiated maps area tags.
 
-Callbacks on mouse events are called with the same arguments where
+|First Level|Second Level|Event        |
+|-----------|------------|-------------|
+|clicked    | onClick    | click       |
+|mouseOver  | onHover    | mouse over  |
+|mouseLeave | noHover    | mouse leave |
+
+Callbacks are called with the same arguments where
 * `this` element that fired event/callback
 * `inst` active instance
 * `id` group of the element
 
-`onConfigured` works slightly different in that `this` will point to
-the image it was instatiated on while one argument `inst` is provided
-
-If you want to define your own behavior to work in place of the defined default
-behavior, simply overwrite the following callbacks in your config
-default behavior is achieved through a seperatecallbacks and basic behavior
-
-* `clicked`
-* `mouseOver`
-* `mouseLeave`
+The seventh callback is `onConfigured`, which is called after instantiation.
+It works slightly different in that `this` will point to the image clicklight
+was called on while one argument `inst` is provided
 
 ### Using the config
 
