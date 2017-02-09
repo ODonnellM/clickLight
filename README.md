@@ -21,6 +21,7 @@ you may want to have a look at the venerable ImageMapster plugin.
 * `<img>` wrapped in `<div>` tag
 * `<area>` tags you want managed by clicklight are recquired to have a
   `data-cl-uid="userSetID"` on each.
+
 #### Usage
 
 Without configuration, clicklight applies and removes coloring to
