@@ -22,6 +22,11 @@ you may want to have a look at the venerable ImageMapster plugin.
 * `<area>` tags you want managed by clicklight are recquired to have a
   `data-cl-uid="userSetID"` on each.
 
+#### Installation
+
+`npm install clicklight`
+`bower install clicklight`
+
 #### Usage
 
 Without configuration, clicklight applies and removes coloring to
