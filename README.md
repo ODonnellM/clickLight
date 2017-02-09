@@ -15,7 +15,7 @@ you may want to have a look at the venerable ImageMapster plugin.
 
 ### Basic Usage
 
-#### Recquirements
+#### Requirements
 
 * image with an assoicated image map
 * `<img>` wrapped in `<div>` tag
