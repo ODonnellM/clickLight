@@ -58,7 +58,7 @@ and 7 callbacks.
 * `clickColor` default color used on click events
 * `hoverColor` default color used on hover events
 
-`hoverColor` and `clickColor` only accept RGB strings
+`hoverColor` and `clickColor` only accept RGB strings.
 
 #### Callbacks
 
@@ -66,18 +66,18 @@ Callbacks exist in two levels. First level callbacks are predefined
 with default bahvior. Second level callbacks are called when defined
 in the config. All events are tied to an instantiated maps area tags.
 
-|First Level|Second Level|Event        |
-|-----------|------------|-------------|
-|clicked    | onClick    | click       |
-|mouseOver  | onHover    | mouse over  |
-|mouseLeave | noHover    | mouse leave |
+|First Level          |Second Level          |Event        |
+|---------------------|----------------------|-------------|
+|clicked(inst, id)    | onClick(inst, id)    | click       |
+|mouseOver(inst, id)  | onHover(inst, id)    | mouse over  |
+|mouseLeave(inst, id) | noHover(inst, id)    | mouse leave |
 
-Callbacks are called with the same arguments where
+Callbacks arguments
 * `this` area that fired event
 * `inst` active instance
 * `id` the area's group
 
-The seventh callback is `onConfigured`, called after instantiation.
+The seventh callback is `onConfigured(inst)`, called after instantiation.
 It works slightly differently in that `this` will point to the image clicklight
 was called on while one argument `inst` is provided.
 
@@ -90,9 +90,9 @@ instantiating.
 $(function() {
 
   $('#thisImg').clicklight({
-    clickColor : '255, 255, 0',
+    clickColor : '255, 0, 0',
+    hoverColor : '255, 200, 0',
     alpha      : '0.6',
-    clickColor : '255, 200, 0',
     onClick    : function (inst, id) {
       console.log(this, 'was just clicked and is in group', id);
     },
@@ -143,7 +143,7 @@ Anything in this object can be redefined to fit virtually any level of functiona
 
 ## API
 
-Clicklight provides methods that can be called through clicklight by
+Clicklight provides 5 methods that can be called through clicklight by
 passing string identifiers into an instance.  Each instance is tied to
 the image it was built on, to get back at it, just call clicklight on
 the image you want the instance of.
