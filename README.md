@@ -107,40 +107,6 @@ $(function() {
 });
 ```
 
-#### Config object
-```javascript
-var defaults = {
-  clicked      : function (inst, id) {
-    if (inst.group[id].is_set)
-      inst.resetState(id);
-    else
-      inst.set(id, inst.settings.clickColor);
-    inst.group[id].is_set = !inst.group[id].is_set;
-
-    if (typeof inst.settings.onClick === 'function')
-      inst.settings.onClick.call(this, inst, id);
-  },
-  mouseOver    : function (inst, id) {
-    inst.setTransient(id, inst.settings.hoverColor);
-
-    if (typeof inst.settings.onHover === 'function')
-      inst.settings.onHover.call(this, inst, id);
-  },
-  mouseLeave   : function (inst, id) {
-    inst.reset(id);
-
-    if (typeof inst.settings.noHover === 'function')
-      inst.settings.noHover.call(this, inst, id);
-  },
-  onConfigured : null,
-  onClick      : null,
-  onHover      : null,
-  noHover      : null,
-  alpha        : '0.4',
-  hoverColor   : '0, 255, 255',
-  clickColor   : '255, 0, 0'
-};
-```
 ## API
 
 Clicklight provides 5 methods that can be called through clicklight by
