@@ -23,7 +23,7 @@ you may want to have a look at the venerable ImageMapster plugin.
   `data-cl-uid="userSetID"` on each.
 #### Usage
 
-In it's most basic form, clicklight applies and removes coloring to
+Without configuration, clicklight applies and removes coloring to
 instantiated mapped areas.
 
 HTML:
@@ -50,7 +50,7 @@ $(function() {
 ### Configuration
 
 Clicklight provides a small config object offering 3 properties
-and 7 callbacks
+and 7 callbacks.
 
 #### Properties
 
@@ -64,8 +64,7 @@ and 7 callbacks
 
 Callbacks exist in two levels. First level callbacks are predefined
 with default bahvior. Second level callbacks are called when defined
-with any additional functionality on a given event. All events are tied
-to an instantiated maps area tags.
+in the config. All events are tied to an instantiated maps area tags.
 
 |First Level|Second Level|Event        |
 |-----------|------------|-------------|
@@ -74,40 +73,38 @@ to an instantiated maps area tags.
 |mouseLeave | noHover    | mouse leave |
 
 Callbacks are called with the same arguments where
-* `this` element that fired event/callback
+* `this` area that fired event
 * `inst` active instance
-* `id` group of the element
+* `id` the area's group
 
-The seventh callback is `onConfigured`, which is called after instantiation.
-It works slightly different in that `this` will point to the image clicklight
-was called on while one argument `inst` is provided
+The seventh callback is `onConfigured`, called after instantiation.
+It works slightly differently in that `this` will point to the image clicklight
+was called on while one argument `inst` is provided.
 
 ### Using the config
 
 To give our config object to clicklight, pass it in while
-instantiating
+instantiating.
 
 ```javascript
 $(function() {
 
   $('#thisImg').clicklight({
     clickColor : '255, 255, 0',
-	alpha      : '0.6',
-	clickColor : '255, 200, 0',
-	onClick    : function (inst, id) {
-	  console.log(this, 'was just clicked and is in group', id);
-	},
-	onConfigured : function (inst) {
-	  console.log(inst, 'was just instantiated on', this);
-	}
+    alpha      : '0.6',
+    clickColor : '255, 200, 0',
+    onClick    : function (inst, id) {
+      console.log(this, 'was just clicked and is in group', id);
+    },
+    onConfigured : function (inst) {
+      console.log(inst, 'was just instantiated on', this);
+    }
   });
 
 });
 ```
 
 #### Config object
-
-For those interested, this is the definition of the config object.
 
 ```javascript
 var defaults = {
@@ -177,4 +174,4 @@ $('#thisImg').clicklight('updateConfig', {/*new config object*/});
 
 * Color's need to be RGB string values
 * no method for deletion of an instance
-* only area tags of type 'rectangle' will work
+* only mapped area tags of type 'rectangle' will work
