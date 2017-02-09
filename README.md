@@ -53,24 +53,27 @@ Clicklight provides a small config object offering 3 properties
 and 7 callbacks.
 
 #### Properties
-
-* `alpha` opacity of colors between 0.0 and 1.0
-* `clickColor` default color used on click events
-* `hoverColor` default color used on hover events
+| Name      | Definition                            |
+|-----------|---------------------------------------|
+| alpha     | opacity of colors between 0.0 and 1.0 |
+| clickColor| default color used on click events    |
+| hoverColor| default color used on hover events    |
 
 `hoverColor` and `clickColor` only accept RGB strings.
 
 #### Callbacks
 
 Callbacks exist in two levels. First level callbacks are predefined
-with default bahvior. Second level callbacks are called when defined
-in the config. All events are tied to an instantiated maps area tags.
+with default behavior. Second level callbacks, when defined in config,
+are called by their first level counterparts. 
 
-|First Level          |Second Level          |Event        |
-|---------------------|----------------------|-------------|
-|clicked(inst, id)    | onClick(inst, id)    | click       |
-|mouseOver(inst, id)  | onHover(inst, id)    | mouse over  |
-|mouseLeave(inst, id) | noHover(inst, id)    | mouse leave |
+All events are tied to an instantiated maps area tags.
+
+| First Level          | Second Level         |Event        |
+|----------------------|----------------------|-------------|
+| clicked(inst, id)    | onClick(inst, id)    | click       |
+| mouseOver(inst, id)  | onHover(inst, id)    | mouse over  |
+| mouseLeave(inst, id) | noHover(inst, id)    | mouse leave |
 
 Callbacks arguments
 * `this` area that fired event
@@ -105,7 +108,6 @@ $(function() {
 ```
 
 #### Config object
-
 ```javascript
 var defaults = {
   clicked      : function (inst, id) {
@@ -139,8 +141,6 @@ var defaults = {
   clickColor   : '255, 0, 0'
 };
 ```
-Anything in this object can be redefined to fit virtually any level of functionality.
-
 ## API
 
 Clicklight provides 5 methods that can be called through clicklight by
