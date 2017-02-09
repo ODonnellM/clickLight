@@ -13,21 +13,17 @@ the gory details of HTML5 canvas under a small, clean API. It has very
 little built-in functionality. If you need a more featureful solution,
 you may want to have a look at the venerable ImageMapster plugin.
 
-## Setup
+### Basic Usage
 
-Clicklight can exist in one of two states
-
-1. Instantiation where nothing or a config object is passed in to
-build an instance
-2. Method calls via passing string identifiers followed by arguments
-
-Clicklight expects
+#### Recquirements
 
 * image with an assoicated image map
-* `<img>` tags needs to be wrapped in `<div>` tags
-* `<area>` tags to be managed are recquired to have a
+* `<img>` wrapped in `<div>` tag
+* `<area>` tags you want managed by clicklight are recquired to have a
   `data-cl-uid="userSetID"` on each.
+#### Usage
 
+HTML:
 ```html
 <div>
   <img src="some/img/src" usemap="#mapName" id="thisImg">
@@ -39,8 +35,7 @@ Clicklight expects
   <area shape="rect" alt="" coords="x1,y1,x2,y2" href="#" data-cl-uid="2" title="example">
 </map>
 ```
-Call the clicklight function on the image
-
+Javascript/jQuery:
 ```javascript
 $(function() {
 
@@ -49,7 +44,7 @@ $(function() {
 });
 ```
 
-## Configuration
+### Configuration
 
 Clicklight config can be used as default or overwritten via the
 provided callbacks.
@@ -57,34 +52,34 @@ provided callbacks.
 #### Properties
 
 * `alpha` opacity of colors between 0.0 and 1.0
-* `clickColor` default color used on clicks
-* `hoverColor` default color used on mouse over
+* `clickColor` default color used on click events
+* `hoverColor` default color used on hover events
 
 `hoverColor` and `clickColor` only accept RGB strings
 
 #### Callbacks
 
-the default callbacks and basic behavior
-* `clicked`    - sets a color
-* `mouseOver`  - temporarily sets `hoverColor`
-* `mouseLeave` - resets to last `set` color or clears
-
-if defined, above callbacks will fire the callbacks below
+when defined, the following callbacks will be fired on their respective events
 * `onClick`
 * `onHover`
 * `noHover`
+* `onConfigured`
 
-listed callbacks are called with the same arguments where
+Callbacks on mouse events are called with the same arguments where
 * `this` element that fired event/callback
 * `inst` active instance
 * `id` group of the element
 
-which looks like so when defining
-* `onClick : function(inst, id) { /*logic*/ }`
+`onConfigured` works slightly different in that `this` will point to
+the image it was instatiated on while one argument `inst` is provided
 
-The last callback is `onConfigured` where `this` will point to the
-image it was instatiated on while one argument `inst` is provided
-* `onConfigured : function(inst) { /*logic*/ }`
+If you want to define your own behavior to work in place of the defined default
+behavior, simply overwrite the following callbacks in your config
+default behavior is achieved through a seperatecallbacks and basic behavior
+
+* `clicked`
+* `mouseOver`
+* `mouseLeave`
 
 ### Using the config
 
@@ -102,7 +97,7 @@ $(function() {
 	  console.log(this, 'was just clicked and is in group', id);
 	},
 	onConfigured : function (inst) {
-	  console.log(inst, 'is ready for operation!');
+	  console.log(inst, 'was just instantiated on', this);
 	}
   });
 
@@ -146,6 +141,7 @@ var defaults = {
   clickColor   : '255, 0, 0'
 };
 ```
+Anything in this object can be redefined to fit virtually any level of functionality.
 
 ## API
 
