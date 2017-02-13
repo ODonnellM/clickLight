@@ -17,9 +17,9 @@ you may want to have a look at the venerable ImageMapster plugin.
 
 #### Requirements
 
-* image with an assoicated image map
+* image with an associated image map
 * `<img>` wrapped in `<div>` tag
-* `<area>` tags you want managed by clicklight are recquired to have a
+* `<area>` tags you want managed by clicklight are required to have a
   `data-cl-uid="userSetID"` on each.
 
 #### Installation
@@ -145,6 +145,6 @@ $('#thisImg').clicklight('updateConfig', {/*new config object*/});
 
 ## Limitations
 
-* Color's need to be RGB string values
+* Colors need to be RGB string values
 * no method for deletion of an instance
 * only mapped area tags of type 'rectangle' will work
